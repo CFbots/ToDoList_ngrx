@@ -1,1 +1,24 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+    --height-header: 60px;
+    --height-todolist: 700px;
+    --height-todolist-header: 50px;
+    --height-todolist-input: 40px;
+    --width-todolist: 600px;
+  
+    --color-green: rgb(16, 188, 148);
+    --color-red-button: rgb(148, 21, 21);
+    --color-red-li-hover: rgb(5, 142, 110);
+  }
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Dancing Script", cursive;
+    user-select: none;
+  }
+  html,
+  body {
+    width: 100vw;
+    height: 100vh;
+    background-color: aquamarine;
+  }

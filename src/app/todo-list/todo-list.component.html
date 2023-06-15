@@ -1,0 +1,10 @@
+<section class="todolist">
+  <header class="todolist__header">todo list</header>
+  <form [formGroup]="form">
+    <div class="input-section"><input class="todolist__input" placeholder="todo..." formControlName="inputbox" /><button
+        (click)="addTodo()">Submit</button></div>
+  </form>
+  <ul id="todolist_container">
+    <app-todo-items *ngFor="let todo of todoList$ | async" [item]="todo" (emitId)="deleteTodo($event)" />
+  </ul>
+</section>
