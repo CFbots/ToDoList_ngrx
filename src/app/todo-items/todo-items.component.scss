@@ -20,8 +20,8 @@ li {
 li button {
   margin-right: 10px;
   border: none;
-  background-color: rgba(0, 0, 0, 0);
-  color: rgb(255, 0, 0);
+  background-color: rgba(107, 101, 101, 0);
+  color: var(--color-red-button);
   font-size: 1.3rem;
 }
 li button:hover {

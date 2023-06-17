@@ -1,33 +1,25 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Todo } from '../interface/user.interface';
-import { BehaviorSubject, tap } from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TodoService {
-  url = 'https://jsonplaceholder.typicode.com/todos';
-
-  todos: Todo[] = []; // store
-
-  store = {
-    todos: this.todos,
-    products: [],
-  };
-
-  private todos$ = new BehaviorSubject(this.store.todos); // selector
-  todolist$ = this.todos$.asObservable();
+  url: string = 'https://jsonplaceholder.typicode.com/todos';
   
   constructor(private http: HttpClient) { }
 
-  getTodo() {
-    // action
-    return this.http.get<Todo[]>(this.url).pipe(
-      tap((todos) => {
-        this.store.todos = [...todos];
-        this.todos$.next(this.store.todos);
-      })
-    );
+  getTodo(): Observable<Todo[]>{
+    return this.http.get<Todo[]>(this.url);
+  }
+
+  deleteTodo(id: number): Observable<void>{
+    return this.http.delete<void>(this.url + '/' + id);
+  }
+
+  addTodo(todo: Todo): Observable<Todo>{
+    return this.http.post<Todo>(this.url, todo);
   }
 }

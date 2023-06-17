@@ -1,14 +1,14 @@
 import { createReducer, on } from "@ngrx/store";
-import { TodoState } from "../interface/user.interface";
+import { TodoState } from "../../interface/user.interface";
 import * as TodoActions from './todo.actions';
 
-const todoState: TodoState = {
+const initialState: TodoState = {
     todolist:[],
-    error:''
+    error: "",
 }; 
 
 export const todoReducer = createReducer(
-  todoState, //initial state
+  initialState,
   on(TodoActions.loadTodolist, (state)=> {
     return {...state}
   }),
@@ -18,16 +18,17 @@ export const todoReducer = createReducer(
       todolist: todos,
     };
   }),
-  on(TodoActions.addTodo, (state, { content }) => {
-    console.log("from reducer adding the todo", content);
-    return {
-      ...state,
-    };
-  }),
   on(TodoActions.loadTodosFailed, (state, { err }) => {
     return {
       ...state,
       err,
+    };
+  }),
+  on(TodoActions.addTodo, (state, todo) => {
+    // console.log("from reducer adding the todo", content);
+    return {
+      ...state,
+      todolist:[...state.todolist, todo]
     };
   }),
   on(TodoActions.deleteTodo, (state, { id }) => {
